@@ -76,11 +76,15 @@ flowchart TB
 
     Access["Layer 2: Application / API Access"]
 
-    subgraph Backend["Layer 3: Modular Monolith Backend"]
+    subgraph Backend["Modular Monolith Backend"]
         direction TB
-        P["Parking Module"]
-        F["Faculty AI Module"]
-        S["Scholarship Module"]
+
+        subgraph Business["Layer 3: Business Service Layer"]
+            direction LR
+            P["Parking Module"]
+            F["Faculty AI Module"]
+            S["Scholarship Module"]
+        end
 
         Shared["Shared Capabilities:
         Authentication / Authorization
@@ -119,8 +123,9 @@ flowchart TB
     Shared --> Data
     Data -.-> External
 
+    Gov -.-> UX
     Gov -.-> Access
-    Gov -.-> Shared
+    Gov -.-> Backend
     Gov -.-> Data
 ```
 
